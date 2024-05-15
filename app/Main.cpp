@@ -1,28 +1,32 @@
 //Using SDL and standard IO
 #include <SDL.h>
+#include <iostream>
 #include <stdio.h>
-
-//Screen dimension constants
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
-
-//The window we'll be rendering to
-SDL_Window* gWindow = NULL;
-
-//The surface contained by the window
-SDL_Surface* gScreenSurface = NULL;
-
-//The image we will load and show on the screen
-SDL_Surface* gHelloWorld = NULL;
 
 int main(int argc, char* args[])
 {
-	//Starts up SDL and creates window
-	bool init();
+	SDL_Window* window = SDL_CreateWindow("conjuration", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1080, 720, 0);
 
-	//Loads media
-	bool loadMedia();
+	if (!window) 
+	{
+		std::cout << "failed to construct the window" << std::endl;
+	}
 
-	//Frees media and shuts down SDL
-	void close();
+	SDL_UpdateWindowSurface(window);
+
+	SDL_Event event;
+
+	auto quit = false;
+
+	while (quit == false)
+	{
+		SDL_WaitEvent(&event);
+
+		switch (event.type) {
+
+		case SDL_QUIT:
+			quit = true;
+		}
+	}
+	return 0;
 }
